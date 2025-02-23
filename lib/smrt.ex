@@ -6,19 +6,6 @@ defmodule Smrt do
     end
   end
 
-  def schemas do
-    case :application.get_key(:smrt, :modules) do
-      {:ok, [Smrt | modules]} ->
-        modules
-        |> Enum.map(&Module.split/1)
-        |> Enum.filter(&(to_string(Enum.at(&1, 1)) == "Schemas"))
-        |> Enum.map(&Module.concat/1)
-
-      _ ->
-        []
-    end
-  end
-
   def describe(schema, query) do
     messages = [
       %{
